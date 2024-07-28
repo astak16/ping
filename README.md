@@ -1,3 +1,29 @@
+## 介绍
+
+此代码仅供学习使用
+
+下载代码
+
+```bash
+git clone https://github.com/astak16/ping.git
+```
+
+打包
+
+```bash
+go build .
+```
+
+运行
+
+```
+./ping www.baidu.com
+
+./ping -i 2000 www.baidu.com
+
+./ping -w 2000 www.baidu.com
+```
+
 ## 解析域名
 
 我们在使用 `ping www.baidu.com` 命令时，会看到下面的输出

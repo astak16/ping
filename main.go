@@ -206,19 +206,6 @@ func total() {
 	fmt.Printf("rtt min/avg/max/mdev = %f/%f/%f/%f ms\n", MinTime, SumTime/float64(i), MaxTime, Mdev)
 }
 
-// let avg = (17.6+17.7+17.8+23.2+23.4)/5
-// let d1 = 17.6 - avg
-// let d11 = Math.pow(d1,2)
-// let d2 = 17.7 - avg
-// let d22 = Math.pow(d2,2)
-// let d3 = 17.8 - avg
-// let d33 = Math.pow(d3,2)
-// let d4 = 23.2 - avg
-// let d44 = Math.pow(d4,2)
-// let d5 = 23.4 - avg
-// let d55 = Math.pow(d5,2)
-// let sum = d11+d22+d33+d44+d55
-
 func mdev() {
 	AvgTime = SumTime / float64(i)
 	var sum float64 = 0
@@ -258,28 +245,3 @@ func parseArgs() {
 	flag.BoolVar(&helpFlag, "h", false, "显示帮助信息")
 	flag.Parse()
 }
-
-// func main() {
-// 	// www.zhihu.com.ipv6.dsa.dnsv1.com.
-// 	// 1595096.sched.d0-dk.tdnsdp1.cn.
-// 	resolveDomain("1595096.sched.d0-dk.tdnsdp1.cn.")
-// }
-
-// func resolveDomain(domain string) {
-// 	records, err := net.LookupIP(domain)
-// 	// fmt.Println(records, "ss")
-// 	if err != nil {
-// 		// return nil, fmt.Errorf("查找IP时出错: %v", err)
-// 		fmt.Println(records)
-// 	}
-
-// 	cname, err := net.LookupCNAME(domain)
-// 	if err != nil {
-// 		// 如果找不到CNAME，就使用原始域名
-// 		cname = domain + "."
-// 		fmt.Println(cname)
-// 	}
-
-// 	fmt.Println(cname, records)
-// 	// return &Info{Cname: cname, Ip: records}, nil
-// }

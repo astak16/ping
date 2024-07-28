@@ -146,6 +146,20 @@ func checkSum(data []byte) uint16 {
 	return uint16(^sum)
 }
 
+// func checkSum(data []byte) uint16 {
+// 	var sum uint32
+// 	for i := 0; i < len(data)-1; i += 2 {
+// 		sum += uint32(data[i])<<8 | uint32(data[i+1])
+// 	}
+// 	if len(data)%2 == 1 {
+// 		sum += uint32(data[len(data)-1]) << 8
+// 	}
+// 	for (sum >> 16) > 0 {
+// 		sum = (sum >> 16) + (sum & 0xFFFF)
+// 	}
+// 	return uint16(^sum)
+// }
+
 func sendICMP(conn net.Conn, seq int, size int) error {
 	// 构建请求
 	icmp := &ICMP{
@@ -191,8 +205,8 @@ func sendICMP(conn net.Conn, seq int, size int) error {
 	t := float64(time.Since(startTime).Nanoseconds()) / 1e6
 	ip := fmt.Sprintf("%d.%d.%d.%d", buf[12], buf[13], buf[14], buf[15])
 	fmt.Printf("%d bytes from %s: icmp_seq=%d time=%fms ttl=%d\n", len(data), ip, RecvCount, t, buf[8])
-	MaxTime = Max(MaxTime, t)
-	MinTime = Min(MinTime, t)
+	MaxTime = math.Max(MaxTime, t)
+	MinTime = math.Min(MinTime, t)
 	SumTime += t
 	times = append(times, t)
 	return nil
@@ -213,20 +227,6 @@ func mdev() {
 		sum += math.Pow(time-AvgTime, 2)
 	}
 	Mdev = math.Sqrt(sum / float64(i))
-}
-
-func Max(a, b float64) float64 {
-	if a > b {
-		return a
-	}
-	return b
-}
-
-func Min(a, b float64) float64 {
-	if a < b {
-		return a
-	}
-	return b
 }
 
 func help() {

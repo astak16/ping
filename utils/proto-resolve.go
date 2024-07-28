@@ -14,7 +14,6 @@ type Info struct {
 
 func resolveDomain(domain string) (*Info, error) {
 	records, err := net.LookupIP(domain)
-	// fmt.Println(records, "ss")
 	if err != nil {
 		return nil, fmt.Errorf("查找IP时出错: %v", err)
 	}
